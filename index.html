@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>V1rtuality | creation</title>
+    <meta charset="UTF-8">
+    <style>
+        /* 1. ПЕРЕМЕННЫЕ ЦВЕТОВ */
+        :root {
+            --bg-body: #ffffff;    /* Светлый фон сайта */
+            --text-main: #333333;  /* Темный текст */
+            --nav-bg: #333333;     /* Фон плашки меню */
+            --nav-text: #ffffff;   /* Текст в меню */
+        }
+
+        /* Цвета для ТЕМНОЙ темы */
+        html.dark-theme {
+            --bg-body: #1a1a1a;    /* Темный фон сайта */
+            --text-main: #f0f0f0;  /* Светлый текст */
+            --nav-bg: #444444;     /* Чуть светлее фон меню */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: 0.3s; /* Плавная смена цветов */
+            margin: 0;
+            padding-top: 80px; /* Чтобы текст не заезжал под панель */
+            font-family: Arial, sans-serif;
+        }
+
+        /* 2. ВАША ПАНЕЛЬ (TASKBAR) */
+        .navbar {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            background-color: var(--nav-bg);
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-content a {
+            color: var(--nav-text);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        /* СТИЛЬ КНОПКИ */
+        #theme-toggle {
+            background: #555;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        #theme-toggle:hover {
+            background: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#">Главная + почта для связи</a>
+            <a href="#">Исходники</a>
+            <!-- ТА САМАЯ КНОПКА -->
+            <button id="theme-toggle">Тема</button>
+        </div>
+    </nav>
+       
+    </div>
+    <!-- 3. СКРИПТ ДЛЯ РАБОТЫ КНОПКИ -->
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Проверяем сохраненную тему в памяти браузера
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark-theme');
+        }
+
+        // Слушаем клик по кнопке
+        btn.addEventListener('click', () => {
+            html.classList.toggle('dark-theme'); // Переключаем класс
+            
+            // Сохраняем результат в localStorage
+            if (html.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+
+
+        <div style="text-align: center;">
+            <b>Привет!</b>
+            <p>На этом сайте ты сможешь скачать исходники автора V1rtuality</p>
+        </div>
+
+        <div style="text-align: center;">
+            <b>Если кратко, то все файлы взяты из моих репозитории GitHub.</b>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
+
+            <img src="ava.jpg" alt="" style="max-width: 100%; height: auto; border-radius: 50px"
+          <div style="margin-top: 60px; border-top: 3px solid red; padding-top: 20px; width: 300px;">
+       <div style="margin-top: 50px; padding-top: 20px; width: fit-content; min-width: 200px;">
+        <p style="margin: 0; line-height: 1.8; font-size: 1.1em;">
+            <b>V1rtuality</b><br>
+            <b>link for GitHub profile: https://github.com/V1rtuality</b><br>
+            <b>Email: g39440065@gmail.com</b>
+        </p>
+        </p>
+        </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Находим ВСЕ элементы, которые похожи на кнопки или ссылки в навбаре
+    const elements = document.querySelectorAll('button, a, div');
+
+    elements.forEach(el => {
+        const text = el.innerText.trim();
+
+        // Если в тексте есть "Главная" — отправляем на gl.html
+        if (text.includes("Главная + почта для связи")) {
+            el.style.cursor = "pointer"; // Чтобы рука появилась при наведении
+            el.onclick = () => window.location.href = 'gl.html';
+        }
+
+        // Если в тексте есть "Исходники" — отправляем на ish.html
+        if (text.includes("Исходники")) {
+            el.style.cursor = "pointer";
+            el.onclick = () => window.location.href = 'ish.html';
+        }
+    });
+});
+</script>
+
+
+</body>
+</html>
+

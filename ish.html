@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>V1rtuality | creation</title>
+    <meta charset="UTF-8">
+    <style>
+        /* 1. ПЕРЕМЕННЫЕ ЦВЕТОВ */
+        :root {
+            --bg-body: #ffffff;    /* Светлый фон сайта */
+            --text-main: #333333;  /* Темный текст */
+            --nav-bg: #333333;     /* Фон плашки меню */
+            --nav-text: #ffffff;   /* Текст в меню */
+        }
+
+        /* Цвета для ТЕМНОЙ темы */
+        html.dark-theme {
+            --bg-body: #1a1a1a;    /* Темный фон сайта */
+            --text-main: #f0f0f0;  /* Светлый текст */
+            --nav-bg: #444444;     /* Чуть светлее фон меню */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: 0.3s; /* Плавная смена цветов */
+            margin: 0;
+            padding-top: 80px; /* Чтобы текст не заезжал под панель */
+            font-family: Arial, sans-serif;
+        }
+
+        /* 2. ВАША ПАНЕЛЬ (TASKBAR) */
+        .navbar {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            background-color: var(--nav-bg);
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-content a {
+            color: var(--nav-text);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        /* СТИЛЬ КНОПКИ */
+        #theme-toggle {
+            background: #555;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        #theme-toggle:hover {
+            background: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#">Главная + почта для связи</a>
+            <a href="#">Исходники</a>
+            <!-- ТА САМАЯ КНОПКА -->
+            <button id="theme-toggle">Тема</button>
+        </div>
+    </nav>
+       
+    </div>
+    <!-- 3. СКРИПТ ДЛЯ РАБОТЫ КНОПКИ -->
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Проверяем сохраненную тему в памяти браузера
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark-theme');
+        }
+
+        // Слушаем клик по кнопке
+        btn.addEventListener('click', () => {
+            html.classList.toggle('dark-theme'); // Переключаем класс
+            
+            // Сохраняем результат в localStorage
+            if (html.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const elements = document.querySelectorAll('.nav-content a'); // Ищем именно ссылки в меню
+
+    elements.forEach(el => {
+        el.addEventListener('click', function(e) {
+            const text = this.innerText.trim();
+
+            if (text.includes("Главная")) {
+                e.preventDefault(); // Останавливаем переход по "#"
+                window.location.href = 'gl.html';
+            }
+
+            if (text.includes("Исходники")) {
+                e.preventDefault(); // Останавливаем переход по "#"
+                window.location.href = 'ish.html';
+            }
+        });
+    });
+});
+</script>
+
+
+<!-- Было: href="htdocs.zip" -->
+<!-- Стало: href="luascriptedition.exe" -->
+
+<a href="luascriptedition.exe" download class="file-card">
+    <span style="font-size: 24px; margin-right: 15px;">⚙️</span>
+    <div style="display: flex; flex-direction: column;">
+        <span class="file-name">luascriptedition.exe</span>
+        <span class="file-info">Нажми, чтобы скачать программу</span>
+    </div>
+</a>
+</div>
+
+<!-- Блок для README чуть ниже -->
+<div id="readme-box" class="readme-style"></div>
+
+
+
+<style>
+/* Центрируем всё это дело */
+.file-container {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+/* Сама закругленная серая рамка */
+.file-card {
+    display: flex;
+    align-items: center;
+    background: #1e1e24;      /* Темный фон */
+    border: 2px solid #3e3e4a; /* Серая рамка */
+    border-radius: 20px;       /* Закругление */
+    padding: 15px 30px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.file-card:hover {
+    border-color: #5c9aff;    /* Синеет при наведении */
+}
+
+.file-name { color: #5c9aff; font-weight: bold; font-family: sans-serif; }
+.file-info { color: #888; font-size: 12px; font-family: sans-serif; }
+
+/* Стиль для README */
+.readme-style {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    color: #ccc;
+    font-family: sans-serif;
+}
+</style>
+
+<script>
+
+    // Код для подгрузки README.md в твой блок
+fetch('./README.md')
+    .then(response => response.text())
+    .then(data => {
+        // Если используешь библиотеку marked, то:
+        // document.getElementById('readme-box').innerHTML = marked.parse(data);
+        // Если нет — просто как текст:
+        document.getElementById('readme-box').innerText = data;
+    });
+
+</script>
+
+<!-- Блок для текста из README -->
+<div id="readme-box" style="
+    max-width: 700px; 
+    margin: 30px auto; 
+    padding: 20px; 
+    background: #1a1a1f; 
+    border: 1px solid #333; 
+    border-radius: 15px; 
+    color: #ccc; 
+    font-family: sans-serif; 
+    line-height: 1.6;
+">
+    Привет всем, я хочу представить свою IDE - ну или же среда разработки.
+
+🚀 LuaScriptEdition IDE
+Эта первая версия IDE, сам он не использует почти IDE, это как блокнот на максималках
+Python
+
+✨ Особенности
+В этой среде бывает подсвечиваеться синтаксис, но только слова в кавычках. Это тоесть - не будет ни какой подстветки как Visual Studio Code с плагином Pylance и другими которые подсвечивают синтаксис и их ошибки.
+По данным тестирования, файл ест немного оперативной памяти. В основном это 20-30 мб.
+Интерфейс был сделан почти как у Visual Studio code, - ПОЧТИ.
+Терминал. НО НЕ СОВСЕМ ТЕРМИНАЛ, в большинстве случаях это просто CMD для тестов консольных приложении. Терминал можно двигать вверх и вниз, что бы было удобно работать и не мешал эта консоль или же терминал на минималках.
+Создание файлов, Удаление файлов и папок, Создание папок, все это можно сделать, с помощью правой кнопкой мыши по слову PROJECT.
+Run как и во всех IDE.
+Сохранение файла прямо в IDE, впринцепи что и тоже базово.
+⚠️ ВАЖНО ПОДМЕТИТЬ
+Эта IDE может использоваться и для других языков, даже для С++, все иза моей не внимательности... Но в будущих обновлениях я поменяю интерфейс, и файлы будут создаваться с помощью клика, а не ввода в строку с помектой .lua, потому что опять же - могут создавать файлы с пометкой .py, .html, .js и другие.
+Файлы OpenSource.py используеться для исходного кода самой IDE.
+ВАЖНО! Файл с закрытым кодом (.exe) ЭТО НЕ ВИРУС! Потому что эта IDE была написана на Python, а как мы знаем, файлы с пометкой .py не запустяться у обычных юзеров, а у тех у кого есть установленный яп Python. Поэтому используеться формат файла .exe.
+📥 Установка
+** В разделе Releases найдите файл "luascriptedition.exe" скачиваете его и пользуйтесь, сама программа не требует установки.
+</div>
+
+<div style="display: flex; align-items: flex-start; justify-content: center; gap: 20px; margin: 30px auto; max-width: 1000px;">
+    
+    <!-- Красная прямоугольная кнопка -->
+    <a href="https://github.com/V1rtuality/LuaScriptEdition-IDE-In-Python" target="_blank" style="
+        display: inline-block;
+        padding: 15px 25px;
+        background-color: #d9534f; /* Красный цвет */
+        color: white;
+        text-decoration: none;
+        border-radius: 8px; /* Небольшое закругление для стиля */
+        font-family: sans-serif;
+        font-weight: bold;
+        white-space: nowrap;
+        border: 1px solid #b52b27;
+        transition: background 0.3s;
+    " onmouseover="this.style.backgroundColor='#c9302c'" onmouseout="this.style.backgroundColor='#d9534f'">
+        GitHub Репозиторий
+    </a>
+    </div>
+</div>
+
+
+</body>
+<html>
